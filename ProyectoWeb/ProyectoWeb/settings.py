@@ -41,6 +41,9 @@ INSTALLED_APPS = [
     "ProyectoWebApp",
     "servicios",
     "blog",
+    "contacto",
+    "tienda",
+    "carro",
 ]
 
 MIDDLEWARE = [
@@ -66,6 +69,8 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                # aca agregamos nuestro context procesor
+                "carro.context_processor.importe_total_carro",
             ],
         },
     },
@@ -130,3 +135,12 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# Email settings
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp-relay.brevo.com"  # Servidor SMTP proporcionado
+EMAIL_PORT = 587  # Puerto proporcionado
+EMAIL_USE_TLS = True  # Esto debe ser True para usar el puerto 587
+EMAIL_HOST_USER = "7b6e25002@smtp-brevo.com"  # Usuario proporcionado
+EMAIL_HOST_PASSWORD = "XsBpx8gNOrSTvLCJ"  # Contraseña proporcionada
+

@@ -7,8 +7,6 @@ from django.conf.urls.static import static # importamos para que se vean las ima
 
 urlpatterns = [
     path('', views.home, name="Home"),
-    path('tienda', views.tienda, name="Tienda"),
-    path('contacto', views.contacto, name="Contacto"),
 ]
 
 urlpatterns+=static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
