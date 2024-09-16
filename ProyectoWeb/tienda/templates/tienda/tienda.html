@@ -5,7 +5,15 @@
 <div class="container">
     
     <div style="float:right;">
-        <p style="color: white;"> Total: {{ importe_total_carro }} </p>
+        {% if request.user.is_authenticated %}
+        
+            {% include "carro/widget.html" %}
+
+        {% else %}
+
+            <div class="alert alert-danger text-center"> Login para ver carro </div>
+        
+        {% endif %}
     </div> 
 
     <div class="row">
@@ -21,13 +29,13 @@
                     <p class="card-text">{{ producto.precio }} &nbsp; $</p>
                 </div>
                 <div class="card-footer text-center">
-                    <a href="#" class="btn btn-success"> Agregar al carro </a>
+                    <a href="{% url 'carro:agregar' producto.id %}" class="btn btn-success"> Agregar al carro </a>
                 </div>
                 {% comment %} Card que se cierra {% endcomment %}
         </div>
     </div>
     
-    {% endfor %}
+    {% endfor %}    
   </div>
 </div>
 

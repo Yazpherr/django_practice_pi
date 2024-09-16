@@ -24,6 +24,16 @@
       <span class="site-heading-lower">Gestión de Pedidos</span>
     </h1>
 
+    {% comment %} Esto es para poner el "hola: name.usuario" {% endcomment %}
+    <div style="text-align: right; margin-right: 100px; color: white;"> 
+      {% comment %} Creamos un condicional para ver si el usuario esta autenticado {% endcomment %}
+      {% if user.is_authenticated %}
+        Hola {{ user.username }} &nbsp; &nbsp; <a style="color: white;" href="{% url 'cerrar_sesion' %}"> Cerrar Session </a>
+      {% else %}
+        <a href="{% url 'logear' %}"> Login </a> &nbsp; &nbsp; <a href="{% url 'Autenticacion' %}"> Registro </a>
+      {% endif %}
+    </div>
+
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark py-lg-4" id="mainNav">
       <div class="container">

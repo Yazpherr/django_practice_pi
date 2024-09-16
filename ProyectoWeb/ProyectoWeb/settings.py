@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os
+from django.contrib.messages import constants as mensajes_de_error
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -44,6 +47,11 @@ INSTALLED_APPS = [
     "contacto",
     "tienda",
     "carro",
+    "autenticacion",
+    "crispy_forms",
+    'crispy_bootstrap4',
+    'pedidos',
+
 ]
 
 MIDDLEWARE = [
@@ -144,3 +152,14 @@ EMAIL_USE_TLS = True  # Esto debe ser True para usar el puerto 587
 EMAIL_HOST_USER = "7b6e25002@smtp-brevo.com"  # Usuario proporcionado
 EMAIL_HOST_PASSWORD = "XsBpx8gNOrSTvLCJ"  # Contraseña proporcionada
 
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+
+MESSAGE_TAGS = {
+    mensajes_de_error.DEBUG: 'debug',
+    mensajes_de_error.INFO: 'info',
+    mensajes_de_error.SUCCESS: 'success',
+    mensajes_de_error.WARNING: 'warning',
+    mensajes_de_error.ERROR: 'danger',
+    
+}

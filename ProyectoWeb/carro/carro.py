@@ -2,14 +2,18 @@ class Carro:
     def __init__(self, request):
         self.request = request 
         self.session = request.session
+        
+        self.carro = self.session.get('carro', {})
+
         # construimos un carro de compra para la sesion 
-        carro = self.session.get('carro')
+        # carro = self.session.get('carro')
         # Si no tenemos carro entonces lo creamos
-        if not carro: 
-            carro = self.session["carro"]={}
-        # si el usuario se va de la pagina y despues vuelve 
-        else: 
-            self.carro = carro
+        # if not carro: 
+        #     carro = self.session["carro"]={}
+        # # si el usuario se va de la pagina y despues vuelve 
+        
+        # # else: 
+        # self.carro = carro
             
     # Ahora creamos una funcion para agregar productos
     def agregar(self, producto):
@@ -20,7 +24,7 @@ class Carro:
                 'nombre': producto.nombre,
                 'precio': str(producto.precio),
                 'cantidad': 1,
-                'imagen': producto.imange.url
+                'imagen': producto.imagen.url
             }
         
         # Ahora le debemos indicar que hacer en caso de que el producto ya se encuentre en el carro 
@@ -30,6 +34,7 @@ class Carro:
                 if key==str(producto.id):
                     # si el producto ya se encuentra en el carro entonces aumentamos la cantidad
                     value['cantidad'] = value['cantidad'] + 1
+                    value["precio"] = float(value["precio"]) + producto.precio
                     break
         
         # Llamaremos a una funcion la cual se encarga de actualizar la session 
@@ -54,8 +59,11 @@ class Carro:
             if key==str(producto.id):
                 # si el producto ya se encuentra en el carro entonces aumentamos la cantidad
                 value['cantidad'] = value['cantidad'] - 1
+                value["precio"] = float(value["precio"]) - producto.precio
+
                 if value["cantidad"]<1:
                     self.eliminar(producto)
+                    
                 break
         self.guardar_carro()
     
